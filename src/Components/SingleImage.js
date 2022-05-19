@@ -7,7 +7,7 @@ const SingleImage = (props) => {
   return (
     <div className="single-photo" image-id={image.id}>
       <Link to={`/${image.id}/${props.index}`}>
-        <img src={imageUrl} alt="" className="SingleImage" />;
+        <img src={imageUrl} alt={`LOADING IMAGE ${image.id}`} className="SingleImage" />;
       </Link>
     </div>
   );

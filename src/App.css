@@ -79,3 +79,19 @@
   font-weight: bold;
   font-size: 40px;
 }
+
+.cross-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 18px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 100px;
+  height: 20px;
+  width: 20px;
+  padding: 10px;
+  margin: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
