@@ -16,11 +16,12 @@ const FetchImagesWrapper = (props) => {
     else getImages();
     return () => cancelRequest();
   }, [page]);
+  const updatePage = () => setPage((x) => x + 1);
 
   const [sentryRef] = useInfiniteScroll({
     loading,
     hasNextPage: hasMore,
-    onLoadMore: () => setPage((x) => x + 1),
+    onLoadMore: updatePage,
     // When there is an error, we stop infinite loading.
     // It can be reactivated by setting "error" state as undefined.
     disabled: !!error,
@@ -30,7 +31,7 @@ const FetchImagesWrapper = (props) => {
     rootMargin: "0px 0px 400px 0px",
   });
 
-  return props.children({ ...props, data, loading, hasMore, sentryRef });
+  return props.children({ ...props, data, loading, hasMore, sentryRef, updatePage });
 };
 
 export default FetchImagesWrapper;

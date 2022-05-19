@@ -18,9 +18,15 @@ const ImageSwiper = (props) => {
   const [loading, setLoading] = useState(props.loading || data.length === 0);
 
   useEffect(() => {
+    // TO fetch More data, In case user keep moving to next image
+    if (imageIndex === data.length - 1) {
+      props.updatePage ? props.updatePage() : navigate("/");
+    }
+  }, [imageIndex, data.length]);
+  useEffect(() => {
     const isLoading = props.loading || data.length === 0;
     setLoading(isLoading);
-    if (!isLoading && (!data[imageIndex] || imageId !== data[imageIndex].id)) {
+    if (!isLoading && !data[imageIndex]) {
       navigate("/");
     }
   }, [imageId, props.loading, data.length]);
@@ -32,6 +38,10 @@ const ImageSwiper = (props) => {
       return;
     }
     const imageId = data[nextImageIndex];
+    if (!imageId) {
+      // navigate("/")
+      console.warn("Need to fetch more images");
+    }
     navigate("/" + imageId.id + "/" + nextImageIndex);
     setLoading(true);
   };
