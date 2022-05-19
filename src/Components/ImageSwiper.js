@@ -7,24 +7,34 @@ const ImageSwiper = (props) => {
   const data = props.data;
   const image = (data && data[currentImage.index]) || {};
   // const loading = props.loading;
-  console.log(currentImage, image, data);
+  console.log(props.loading, currentImage, image);
+  let loading_ = props.loading || data.length === 0;
+  if (!loading_ && !data[+currentImage.index]) {
+    console.log("Navigate To Home", data, currentImage);
+    navigate("/");
+    return <> MOVING TO HOME PAGE</>;
+  }
   // useEffect(() => {
-  //   if (!props.loading && (!data || !data[+currentImage.index])) {
-  //     console.log("Navigate To Home", currentImage);
-  //     navigate("/");
-  //   }
   // }, [props.loading]);
   const changeImage = (diff) => {
-    let newImage = +currentImage.index + diff;
-    navigate("/test123/" + newImage);
+    let nextImageIndex = +currentImage.index + diff;
+    if (nextImageIndex < 0) {
+      navigate("/");
+      return;
+    }
+    const imageId = data[nextImageIndex];
+    navigate("/" + imageId.id + "/" + nextImageIndex);
   };
   return (
     <div className="imageBanner" style={{ zIndex: 1 }}>
+      <div className="side-button cross-button" onClick={() => navigate("/")}>
+        <div>X</div>
+      </div>
       <div className="side-button" onClick={() => changeImage(-1)}>
-        {"<"}
+        {currentImage.index == 0 ? "X" : "<"}
       </div>
       <div style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center" }}>
-        <SingleImage image={image} imageUrlHeading={"full"} />
+        {loading_ ? <>LOADING</> : <SingleImage image={image} imageUrlHeading={"full"} />}
       </div>
       <div className="side-button" onClick={() => changeImage(1)}>
         {">"}
