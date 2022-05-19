@@ -26,7 +26,7 @@ const ImageSwiper = (props) => {
   useEffect(() => {
     const isLoading = props.loading || data.length === 0;
     setLoading(isLoading);
-    if (!isLoading && (!data[imageIndex] || data[imageIndex] !== imageId)) {
+    if (!isLoading && (!data[imageIndex] || data[imageIndex].id !== imageId)) {
       navigate("/");
     }
   }, [imageId, props.loading, data.length]);
