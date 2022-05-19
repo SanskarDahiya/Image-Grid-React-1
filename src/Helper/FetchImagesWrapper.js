@@ -2,7 +2,7 @@ import { fetchImages } from "../Apis/ImageApi";
 import { useEffect, useState } from "react";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 
-const MAX_PAGE = 10;
+const MAX_PAGE = 1000; // MAX NUMBER OF PAGE, PER PAGE-> 10 Images
 const FetchImagesWrapper = (props) => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
