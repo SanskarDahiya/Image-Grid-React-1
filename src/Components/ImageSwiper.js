@@ -52,7 +52,7 @@ const ImageSwiper = (props) => {
         {imageIndex == 0 ? "X" : "<"}
       </div>
       <div style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center" }}>
-        {loading ? <>{`LOADING IMAGE ${imageId}`}</> : <SingleImage image={image} imageUrlHeading={"full"} />}
+        {loading ? <>{`LOADING IMAGE ${imageId}`}</> : <SingleImage image={image} imageUrlHeading={"raw"} />}
       </div>
       <div className="side-button" onClick={() => changeImage(1)}>
         {">"}
