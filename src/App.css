@@ -53,6 +53,9 @@
   margin: 10px 2px;
   flex-grow: 1;
   vertical-align: middle;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .SingleImage {
