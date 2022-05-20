@@ -33,6 +33,25 @@ const ImageSwiper = (props) => {
     }
   }, [imageId, props.loading, data.length]);
 
+  const OnKeyPress = (event) => {
+    switch (event.key) {
+      case "ArrowRight":
+        changeImage(1);
+        break;
+      case "ArrowLeft":
+        changeImage(-1);
+        break;
+      case "Escape":
+        navigateToHome();
+        break;
+    }
+  };
+  useEffect(() => {
+    window.addEventListener("keydown", OnKeyPress);
+    return () => {
+      window.removeEventListener("keydown", OnKeyPress);
+    };
+  }, []);
   const changeImage = (diff) => {
     let nextImageIndex = imageIndex + diff;
     if (nextImageIndex < 0) {
