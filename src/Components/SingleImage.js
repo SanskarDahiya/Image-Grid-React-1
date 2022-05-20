@@ -6,12 +6,13 @@ const SingleImage = (props) => {
   const image = props.image;
   const imageUrlHeading = props.imageUrlHeading || "thumb";
   const imageUrl = image.urls && image.urls[imageUrlHeading];
+  const imageId = image.id;
   return (
-    <div className="single-photo" image-id={image.id}>
-      <Link to={`/${image.id}/${props.index}`}>
+    <div className="single-photo" id={imageId} image-id={imageId}>
+      <Link to={`/${imageId}/${props.index}`}>
         <img
           src={imageUrl}
-          alt={`Error id- ${image.id}`}
+          alt={`Error id- ${imageId}`}
           onLoad={() => {
             // console.log(imageUrl, "Image load");
             setLoading(false);
