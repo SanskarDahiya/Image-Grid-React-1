@@ -1,13 +1,15 @@
 import axiosHooks from "axios-hooks";
 import Axios from "axios";
-
-const ACCESS_KEY = "";
+const REACT_APP_UNSPLASH_ACCESS_TOKEN = process.env.REACT_APP_UNSPLASH_ACCESS_TOKEN;
+if (!REACT_APP_UNSPLASH_ACCESS_TOKEN) {
+  alert("No Access Token Available");
+}
 // https://api.unsplash.com/photos/er9wYHRk55Y?page=1&client_id=ACCESS_TOKEN
 const axios = Axios.create({
   baseURL: "https://api.unsplash.com",
   timeout: 10000,
   headers: {
-    Authorization: `Client-ID ${ACCESS_KEY}`,
+    Authorization: `Client-ID ${REACT_APP_UNSPLASH_ACCESS_TOKEN}`,
   },
 });
 axiosHooks.configure({ axios });

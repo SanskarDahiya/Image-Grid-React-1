@@ -8,14 +8,22 @@ const FetchImagesWrapper = (props) => {
   const [page, setPage] = useState(1);
   const [{ data: currData = [], loading, error }, getImages, cancelRequest] = fetchImages({ page });
   const [hasMore, setHasMore] = useState(true);
-  useEffect(() => setData([...data, ...currData]), [currData]);
+  useEffect(() => {
+    if (currData.length) {
+      setData([...data, ...currData]);
+    }
+  }, [currData]);
 
   useEffect(() => {
     // On Page Change
-    if (page > MAX_PAGE) setHasMore(false);
-    else getImages();
+    if (page > MAX_PAGE || error) {
+      hasMore && setHasMore(false);
+    } else {
+      !hasMore && setHasMore(true);
+      getImages();
+    }
     return () => cancelRequest();
-  }, [page]);
+  }, [page, !!error]);
   const updatePage = () => setPage((x) => x + 1);
 
   const [sentryRef] = useInfiniteScroll({
@@ -31,7 +39,7 @@ const FetchImagesWrapper = (props) => {
     rootMargin: "0px 0px 400px 0px",
   });
 
-  return props.children({ ...props, data, loading, hasMore, sentryRef, updatePage });
+  return props.children({ ...props, data, loading, hasMore, error, sentryRef, updatePage });
 };
 
 export default FetchImagesWrapper;
